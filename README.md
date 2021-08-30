@@ -9,7 +9,7 @@ In this course, we will learn JavaScript properly. Then, we will learn useful de
 
  
 
-##Learning Outcomes
+Learning Outcomes
 
 By the successful completion of this course, students will be able to:
 
@@ -20,13 +20,13 @@ Clear insight on Client/Server Architecture, communication with Web Servers.
 Establish an industry standard workflow for building web applications.
  
 
-##Assessable Tasks
+Assessable Tasks
 
 The goal of the course is to work to the best of the students’ ability. The grades will reflect that effort. Attendance, Participation, and short assignments will serve as the way to measure student engagement with the class.
 
 
-##Evaluation and Final Grade Calculation
 
+Evaluation and Final Grade Calculation
 
 Active Participation / Attendance - 30%
 
@@ -53,8 +53,7 @@ Midterm and Final Project means the collective process of developing and deliver
  
 
  
-
-##Course Outline
+Course Outline
 
 The course will introduce unique features of JavaScript and explore its evolution from a browser enhancement framework into a modern web framework for building efficient and highly capable applications. The learning process will work through basic programming approaches, learning syntax, applying them on individual projects and eventually preparing a modern development workflow to formalize and automate the process of building and generating a modern web programming platform.
 
