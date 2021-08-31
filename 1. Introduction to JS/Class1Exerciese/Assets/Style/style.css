@@ -1,0 +1,32 @@
+body{
+    background-color:rgb(226, 215, 215)}
+
+
+#container{
+    width: 80%;
+    height: auto;
+    margin-left: 10%;
+}
+
+.boxes{
+    width: calc(100%/3);
+    height: 20vw;
+    background-color: aquamarine;
+    float: left;
+
+}
+
+#box1{
+    background-color: chocolate;
+
+}
+
+#box2{
+    background-color: rgb(35, 151, 151);
+
+}
+
+#box3{
+    background-color: rgb(155, 95, 214);
+
+}
