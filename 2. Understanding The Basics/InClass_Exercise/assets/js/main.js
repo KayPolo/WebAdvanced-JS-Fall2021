@@ -23,6 +23,7 @@ let images = [
     "img15.jpg"
 ];
 
+let imgSwitch = 0;
 
 //What get's executed when you load your program
 document.addEventListener("DOMContentLoaded",function(){
@@ -60,8 +61,77 @@ loadImages = () => {
             imageNumber = 0;
         }
 
+
+        //When I click on an image I want to open that same image 
+        newImg.addEventListener("click", (value)=>{
+            popUp(value.target.id);
+            imgSwitch = value.target.id;
+        });
+
+
     
     }
+
+}
+
+
+//Open the popup in full screen
+popUp = (imgCount)=>{
+
+        imgSwitch = imgCount;
+
+        let popup = document.getElementById("popup");
+        let img = document.getElementById("pic");
+
+        popup.style.display="block";
+
+        img.src = "./assets/images/"+images[imgCount];
+
+        img.addEventListener("click", ()=>{
+            close();
+        })
+
+    
+
+}
+
+//Closes the popup
+close = ()=>{
+
+    let popup = document.getElementById("popup");
+    popup.style.display="none";
+    
+
+}
+
+
+change = (direction)=>{
+
+    let numOfImg = images.length;
+    let next = 0;
+    let img = document.getElementById("pic");
+
+
+    if(direction == 1){
+
+        if(imgSwitch > numOfImg - 1){
+            next = 0;
+        }else{
+            imgSwitch ++;
+            next = imgSwitch;
+        }
+
+    }else if(direction == -1){
+        if (imgSwitch-1 < 0){
+            next = numOfImg - 1;
+        }else{
+            next = imgSwitch - 1;
+        }
+    }
+    img.src = "./assets/images/"+images[next];
+    imgSwitch=next;
+
+
 
 }
 

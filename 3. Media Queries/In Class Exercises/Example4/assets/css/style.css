@@ -1,0 +1,84 @@
+body{
+    background-color: teal;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1em;
+    text-align: center;
+
+}
+
+.items{
+    width: 78vw;
+    height: 78vw;
+    background-color: yellow;
+    margin: 1vw;
+    float: left;
+    text-align: center;
+    
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    text-align: center;
+
+}
+
+#mobile{
+    display: none;
+}
+
+#desktop{
+    display: block;
+}
+
+#work{
+    position: absolute;
+    width: 80vw;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+
+
+@media all and (min-width:800px) and (max-width: 1200px){
+    body{
+        background-color: gold;
+    }
+
+    .items{
+        width: calc(76vw / 2);
+        height: calc(76vw / 2);
+        background-color: rgb(240, 240, 240);
+    }
+
+}
+
+
+
+@media all and (min-width:1201px){
+    body{
+        background-color: purple;
+    }
+
+    .items{
+        width: calc(74vw / 3);
+        height: calc(74vw / 3);
+        background-color: lightblue;
+    }
+
+}
+
+
+@media all and (max-width:799px) and (orientation: landscape){
+    body{
+        background-color: rgb(89, 58, 167);
+    }
+
+    .items{
+        width: calc(76vw / 2);
+        height: calc(76vw / 2);
+        background-color: rgb(240, 240, 240);
+    }
+
+}
