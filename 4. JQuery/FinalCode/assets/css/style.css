@@ -1,0 +1,245 @@
+/* Some General Styling  */
+	*{
+		margin: 0;
+		padding: 0;
+	}
+
+	body{
+		font-size: 16px;
+		font-family: Arial, sans-serif;
+		top: 0;
+	}	
+
+	.ham-container{
+		position: fixed;
+		top: 20px;
+		left: 20px;
+		z-index: 90;
+
+		display: block;
+	}
+
+	#hamberguer{
+		font-size: 2.5em; 
+		color:gold; 
+		cursor: pointer;
+	}
+	
+
+
+/* Navigation Styling  */
+
+	#mySideNav{
+		width: 0;
+		height: 100vh;
+		z-index: 100;
+		background-color: black;
+		opacity: 0.8;
+		position: fixed;
+		text-align: center;
+		transition: width .5s; 
+		overflow-x: hidden;
+
+	}
+
+	#mySideNav.openMenu{
+		width:100vw; 
+	}
+
+
+    #closeIcon{
+		position: fixed;
+		z-index: 110;
+		right: 3vw;
+		font-size: 4em;
+		color: white;
+
+	}
+
+	.sideNav a{
+		text-decoration: none;
+		font-size: 2em;
+		color: white;
+		display: block;
+		padding: 10px;
+		font-family: Arial;
+		margin-top: 30px;
+
+	}
+
+	.sideNav a:hover{
+	color: gold;
+	}
+
+
+
+/* home page */
+
+	#home{
+		width: 100%;
+		height: 400px;
+		background-color: grey;
+		position: relative;
+		text-align: center;
+
+	}
+
+	.big-text{
+		font-size: 4em;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		font-family: 'Arial';
+		position: absolute;
+		color: white;
+
+	}
+
+
+/* All Sections */
+	.page{
+		width: 100%;
+		height: 100vh;
+		z-index: 1;
+		position: relative;
+		text-align: center;
+	}
+
+
+/* First Section */
+	.linkOne{
+		background-color: palevioletred;
+	}
+
+
+
+/* Second Section */
+	.linkTwo{
+		background-color: orange;
+
+	}
+
+
+/* Third Section */
+	.linkThree{
+		background-color: teal;
+
+	}
+
+
+
+/* menu page */
+	.menubar{
+		background-color: #f8f7fb;
+		width: 100vw;
+		height: 50px;
+		opacity: 0.8;
+		z-index: 10;
+		position: sticky;
+		top: 0;
+		text-align: center;
+
+		display: none;
+		
+		
+	}
+
+	.menubar nav{
+
+		text-decoration: none;
+		list-style-type: none;
+		height: 50px;
+		margin-top: -50px;
+		z-index: 20; 
+		position: relative;
+
+	}
+
+	.menubar nav li {
+		width: 100%;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		position: absolute;
+	}
+
+	.submenu{
+		text-decoration: none;
+		color: #604B9F;
+		background-color: none;
+		font-size: 1.5em;
+		font-family: Arial, sans-serif;
+		padding: 13px;
+
+	}
+
+	.submenu:hover{
+		background-color: #604B9F;
+		color: white;
+		text-decoration: none;
+	}
+
+
+
+	/* Small Screen */
+
+	@media screen and (max-width: 500px) {
+
+		.ham-container{
+
+			display: block;
+			
+		}
+
+		.menubar{
+			
+			display: none;
+		}
+		
+	}
+
+	
+	/* Medium Screen */
+	@media screen and (min-width: 500px) and (max-width: 780px) {
+
+		.ham-container{
+
+			display: block;
+			
+		}
+		.menubar{
+			
+			display: none;
+		}
+		
+		#mySideNav.openMenu{
+			width:80vw; 
+		}
+
+		#closeIcon{
+			right: 23vw;
+		}
+	
+
+	}
+
+
+
+	/* Larger Screen  */
+
+	@media screen and (min-width: 780px) {
+
+		.ham-container{
+
+			display: none;
+			
+		}
+		.menubar{
+			
+			display: block;
+		}
+		
+	}
+
+
+
+

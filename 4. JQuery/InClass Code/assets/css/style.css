@@ -1,0 +1,215 @@
+/* General Styling  */
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+
+body{
+	font-size: 16px;
+	font-family: Arial, Helvetica, sans-serif;
+	top: 0;
+	background-color: darkgray;
+}
+
+
+
+/*Side Navigation*/
+
+#mySideNav{
+	width: 0;
+	height: 100vh;
+	z-index:10;
+	background-color: black;
+	opacity: 0.8;
+	position: fixed;
+	text-align: center;
+	transition: width 0.5s;
+
+	overflow-x: hidden;
+
+	text-decoration: none;
+	list-style-type: none;
+
+}
+
+
+#mySideNav.openMenu{
+	width: 100vw;
+}
+
+
+
+.sideNav a{
+	text-decoration: none;
+	font-size: 2em;
+	color: white;
+	display: block;
+	padding: 10px;
+	margin-top: 30px;
+	
+}
+
+
+
+.sideNav a:hover{
+	color: gold;
+}
+
+
+#closeIcon{
+	position: fixed;
+	z-index: 25;
+	right: 3vw;
+	font-size: 4em;
+	color: white;
+}
+
+
+/* Menu Icon Style */
+.hamContainer{
+	position: fixed;
+	top: 20px;
+	left: 20px;
+	z-index: 9;
+	display: block;
+}
+
+#hamburguer{
+	font-size: 2.5em;
+	color: white;
+	cursor: pointer;
+}
+
+
+/*Main Navigation for large devices*/
+.menubar{
+	background-color: azure;
+	width: 100vw;
+	height: 50px;
+	opacity: 0.8;
+	z-index: 8;
+	text-align: center;
+	position: sticky;
+	top: 0;
+	display: block;
+
+}
+
+.menubar nav{
+	text-decoration: none;
+	list-style-type: none;
+	height: 50px;
+	margin-top: -50px;
+	position: relative;
+}
+
+
+.menubar nav li{
+	width: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	position: absolute;
+}
+
+.submenu{
+	text-decoration: none;
+	color: dimgray;
+	font-size: 1.5em;
+	background-color: none;
+	padding: 13px;
+
+}
+
+.submenu:hover{
+	background-color: #604B9F;
+	color: white;
+}
+
+
+
+
+/* Home Section */
+#home{
+	width: 100vw;
+	height: 400px;
+	background-color: dimgray;
+	position: relative;
+}
+
+.bigText{
+	text-align: center;
+	color: whitesmoke;
+	font-size: 4em;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+
+
+/* Other Sections */
+
+.page{
+	width: 100vw;
+	height: 100vh;
+	z-index: 1;
+	position: relative;
+	text-align: center;
+}
+
+#linkOne{
+	background-color: goldenrod;
+}
+
+#linkTwo{
+	background-color: rgb(41, 189, 174);
+}
+
+
+#linkThree{
+	background-color: palevioletred;
+}
+
+
+
+
+@media screen and (min-width: 500px) and (max-width: 779px){
+	.hamContainer{
+		display: block;
+	}
+
+	.menubar{
+		display: none;
+	}
+
+	#mySideNav.openMenu{
+		width: 80vw;
+	}
+
+	#closeIcon{
+		right: 23vw;
+	}
+}
+
+@media screen and (max-width: 500px){
+	.hamContainer{
+		display: block;
+	}
+
+	.menubar{
+		display: none;
+	}
+}
+
+@media screen and (min-width: 780px){
+	.hamContainer{
+		display: none;
+	}
+
+	.menubar{
+		display: block;
+	}
+}
