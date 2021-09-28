@@ -1,0 +1,21 @@
+{"friends":[
+
+    {
+        "firstName":"Chris",
+        "lastName":"Smith",
+        "age":"54"
+
+    },
+    {
+        "firstName":"Daniel",
+        "lastName":"Klain",
+        "age":"22"
+
+    },
+    {
+        "firstName":"Diana",
+        "lastName":"Palmer",
+        "age":"76"
+
+    }
+]}
