@@ -1,0 +1,69 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #434b54;
+}
+
+.container {
+    top: 10%;
+    width: 100%;
+    position: absolute;
+}
+
+#search {
+    padding: 20px;
+}
+
+#search input,
+button {
+    outline: none;
+    border: 5px solid rgb(27, 171, 223);
+    font-size: 28px !important;
+    line-height: 1.2em !important;
+    padding: 15px 20px !important;
+}
+
+#search input {
+    width: 480px;
+    max-width: 100%;
+}
+
+#search button {
+    background-color:  rgb(27, 171, 223);
+    color: white;
+}
+
+#view, .view{
+    width: 50%;
+    margin-left: 25%;
+}
+
+.name{
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+    margin: 15px;
+    text-transform: uppercase;
+    initial-letter: 5px;
+
+}
+
+.images{
+    width: 100%;
+    height: auto;
+}
+
+h1, #error{
+    color: azure;
+    font-size: 30px;
+}
+
+.date{
+    color: beige;
+    font-size: 20px;
+}
+
