@@ -1,0 +1,88 @@
+.App {
+  text-align: center;
+}
+
+
+/* This is the style for the Header */
+
+.header-img{
+  object-fit: cover;
+  height: 300px;
+  width: 100vw;
+  text-align: center;
+  overflow-x: hidden;
+  top: 0;
+  margin-top: 0;
+}
+
+
+/* Tiles Style */
+.tiles{
+  width: calc(94vw / 3);
+  text-align: left;
+  margin: 1vw;
+  display: inline-flex;
+  top: 0;
+  left: 0;
+}
+
+.tileImg{
+  width: 100%;
+}
+
+.tileContainer{
+  cursor: pointer;
+}
+
+
+/* Project Style */
+
+#project{
+  width: 100vw;
+  position: fixed;
+  background-color: white;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.parragraph{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.5rem;
+  width: 90%;
+  margin-left: 5%;
+  text-align: left;
+  margin-top: 50px;
+}
+
+.title-text{
+  font-size: 4rem;
+  font-family: Arial, Helvetica, sans-serif;
+  color: dimgray;
+  margin: 50px;
+  text-align: left;
+}
+
+.close{
+  z-index: 10;
+  color: dimgray;
+  font-size: 3rem;
+  position: absolute;
+  right: 50px;
+  top: 50px;
+  cursor: pointer;
+}
+
+
+/* 
+Show and Hide */
+
+.show{
+  display: inLine;
+
+}
+
+.hide{
+  display: none;
+}
