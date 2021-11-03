@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)https://www.d3-graph-gallery.com/graph/shape.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <script src="./Building shapes with d3_files/f(4).txt"></script><script type="text/javascript" async="" src="./Building shapes with d3_files/analytics.js"></script><script src="./Building shapes with d3_files/f(5).txt" id="google_shimpl"></script><script async="" src="./Building shapes with d3_files/f(6).txt"></script>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-3523953066677938",
+            enable_page_level_ads: true
+       });
+  </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="./Building shapes with d3_files/js"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-79254642-6');
+    </script>
+
+    
+    <title>Building shapes with d3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Drawing axis with d3.js">
+    <meta name="keywords" content="Data,Dataviz,Datavisualization,Javascript, JS, d3.js, shapes">
+    <meta name="author" content="Yan Holtz">
+  <link rel="icon" href="https://www.d3-graph-gallery.com/img/logo/D3_single_small.png">
+
+    <meta property="og:title" content="Drawing axis with d3.js">
+    <meta property="og:image" content="img/overview_RGG.png">
+    <meta property="og:description" content="Using d3.js to draw axis">
+
+    <!-- Bootstrap core CSS -->
+    <link href="./Building shapes with d3_files/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="./Building shapes with d3_files/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="./Building shapes with d3_files/agency.css" rel="stylesheet">
+
+    <!-- PRISM -->
+    <script src="./Building shapes with d3_files/prism.js"></script>
+    <link href="./Building shapes with d3_files/prism.css" rel="stylesheet">
+
+    <!-- D3.JS v4 -->
+    <script src="./Building shapes with d3_files/d3.v4.js"></script>
+
+    <!-- JQUERY -->
+    <script src="./Building shapes with d3_files/jquery.min.js"></script>
+
+    <!-- HTML TO CANVAS -->
+    <script src="./Building shapes with d3_files/html2canvas.js"></script>
+
+    <!-- Function to parse html and js code chunks made by Yan Holtz -->
+    <script src="./Building shapes with d3_files/myParser.js"></script>
+
+    <!-- Bootstrap js -->
+    <script src="./Building shapes with d3_files/bootstrap.bundle.min.js"></script>
+    <script src="./Building shapes with d3_files/agency.min.js"></script>
+
+  <meta http-equiv="origin-trial" content="AxujKG9INjsZ8/gUq8+dTruNvk7RjZQ1oFhhgQbcTJKDnZfbzSTE81wvC2Hzaf3TW4avA76LTZEMdiedF1vIbA4AAABueyJvcmlnaW4iOiJodHRwczovL2ltYXNkay5nb29nbGVhcGlzLmNvbTo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2NTI3NzQ0MDAsImlzVGhpcmRQYXJ0eSI6dHJ1ZX0="><meta http-equiv="origin-trial" content="Azuce85ORtSnWe1MZDTv68qpaW3iHyfL9YbLRy0cwcCZwVnePnOmkUJlG8HGikmOwhZU22dElCcfrfX2HhrBPAkAAAB7eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2NTI3NzQ0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A16nvcdeoOAqrJcmjLRpl1I6f3McDD8EfofAYTt/P/H4/AWwB99nxiPp6kA0fXoiZav908Z8etuL16laFPUdfQsAAACBeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2NTI3NzQ0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="AxBHdr0J44vFBQtZUqX9sjiqf5yWZ/OcHRcRMN3H9TH+t90V/j3ENW6C8+igBZFXMJ7G3Pr8Dd13632aLng42wgAAACBeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2NTI3NzQ0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A88BWHFjcawUfKU3lIejLoryXoyjooBXLgWmGh+hNcqMK44cugvsI5YZbNarYvi3roc1fYbHA1AVbhAtuHZflgEAAAB2eyJvcmlnaW4iOiJodHRwczovL2dvb2dsZS5jb206NDQzIiwiZmVhdHVyZSI6IlRydXN0VG9rZW5zIiwiZXhwaXJ5IjoxNjUyNzc0NDAwLCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A/OOU4XAFfeAV4kM4+W9WBwNAHqq/bvtrRcJ1wpnNyO/i076BSUy1d14l2kBEgVmEuvxojSpD23172C6hBg2AQYAAACWeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQ29udmVyc2lvbk1lYXN1cmVtZW50IiwiZXhwaXJ5IjoxNjM0MDgzMTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlLCJ1c2FnZSI6InN1YnNldCJ9"><meta http-equiv="origin-trial" content="AwrB+XVH/KV6HfZNVtSEqlUJi3yUbtCp0/TJRj+38NDIw19/9P1h7ECTtdLdhIzG0Bsl4n/0rVmttJtGUCcewgAAAACceyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQ29udmVyc2lvbk1lYXN1cmVtZW50IiwiZXhwaXJ5IjoxNjM0MDgzMTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlLCJ1c2FnZSI6InN1YnNldCJ9"><meta http-equiv="origin-trial" content="Ax15QOERqai2A5XWrDY38Eg07xh2T0pkhpDPJuDlxr7D2Ka8wHvklgK7tTPZOnT+8H31lwHto5JpvYV8jRn1WgIAAACceyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQ29udmVyc2lvbk1lYXN1cmVtZW50IiwiZXhwaXJ5IjoxNjM0MDgzMTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlLCJ1c2FnZSI6InN1YnNldCJ9"><link rel="preload" href="./Building shapes with d3_files/f(7).txt" as="script"><script type="text/javascript" src="./Building shapes with d3_files/f(7).txt"></script><script async="" src="./Building shapes with d3_files/ca-pub-3523953066677938"></script><script async="" src="./Building shapes with d3_files/AGSKWxX3lH5msyMTlgZLktGQMeiHrdyS_MCvD3QK6Gtw_LLW13_0hniCqR_YPL6bR2IBhMFf272zl5y225ZMZ9bMJHU="></script><script async="" src="./Building shapes with d3_files/AGSKWxUhQ_pwOjE0putwdGVolPUSdW_W3yiZokrShlM-HxMt5hb_f7q5DcP8PkOHyfy7yxCJd7pW0RP9WdCv4QQ_LOpGywPG4o-57XEslv1gQy8_aqyW_zpJwxAW9KQ43JyX_5W0XfqMVLnfEr_wQ5QHIDALFvqi2cbmNDu8ZAHpsZA1VurfYwZ2odaDntcS"></script><script async="" src="./Building shapes with d3_files/AGSKWxXgJHJU0xxtqgdcb7CHIoVMTkFLCGDWZRqxmEgbpXl3wwLdd0pYobwwk-NlpOa0CpZ1KZ4zl948RRcrogkLQ2fWRcGohKRtvqRIMCji4beMhQOEKddraFGt-MeBOe4o-R-U1ZypfTeYZYF7XH0M_EbTLXnWStq-FTyhTHcngjaYyNyd6XVba5yLNUiu"></script></head>
+
+
+
+
+  <body data-spy="scroll" data-target="#myScrollspy" data-offset="1" data-new-gr-c-s-check-loaded="14.1036.0" data-gr-ext-installed="" data-new-gr-c-s-loaded="14.1036.0">
+
+
+    <!-- THIS ALLOWS TO INSERT THE MENU THAT IS STORED IN A MENU.HTML FILE-->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav"><div class="container">
+  <a href="https://www.d3-graph-gallery.com/index.html">← D3.js Graph Gallery</a>
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    Menu
+    <i class="fa fa-bars"></i>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarResponsive">
+    <ul class="navbar-nav text-uppercase ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="modal" href="https://www.d3-graph-gallery.com/graph/shape.html#researchModal"><i class="fa fa-search"></i></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="modal" href="https://www.d3-graph-gallery.com/graph/shape.html#LogoMenu">Chart types</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link" href="https://www.d3-graph-gallery.com/graph/shape.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Quick
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <p class="menuTitle"><i>Basics</i></p>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://www.d3-graph-gallery.com/intro_d3js.html">Intro to d3</a>
+          <a class="dropdown-item" href="https://www.d3-graph-gallery.com/graph/shape.html">Shape</a>
+          <a class="dropdown-item" href="https://www.d3-graph-gallery.com/graph/basic_datamanipulation.html">Data wrangling</a>
+          <p class="menuTitle"><i>Customize</i></p>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://www.d3-graph-gallery.com/graph/custom_axis.html">Axis</a>
+          <a class="dropdown-item" href="https://www.d3-graph-gallery.com/graph/custom_color.html">Color</a>
+          <a class="dropdown-item" href="https://www.d3-graph-gallery.com/graph/custom_theme.html">Themes</a>
+          <a class="dropdown-item" href="https://www.d3-graph-gallery.com/graph/custom_legend.html">Legend</a>
+          <a class="dropdown-item" href="https://www.d3-graph-gallery.com/graph/custom_responsive.html">Responsiveness</a>
+          <a class="dropdown-item" href="https://www.d3-graph-gallery.com/graph/custom_annotation.html">Annotation</a>
+          <p class="menuTitle"><i>Interactivity</i></p>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://www.d3-graph-gallery.com/graph/interactivity_tooltip.html">Tooltip</a>
+          <a class="dropdown-item" href="https://www.d3-graph-gallery.com/graph/interactivity_button.html">Button</a>
+          <a class="dropdown-item" href="https://www.d3-graph-gallery.com/graph/interactivity_zoom.html">Zoom</a>
+          <a class="dropdown-item" href="https://www.d3-graph-gallery.com/graph/interactivity_brush.html">Brushing</a>
+          <a class="dropdown-item" href="https://www.d3-graph-gallery.com/graph/interactivity_transition.html">Transition</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://www.d3-graph-gallery.com/all.html">ALL</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://www.r-graph-gallery.com/">R</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://www.python-graph-gallery.com/">Python</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link js-scroll-trigger" href="https://www.data-to-viz.com/">Data to viz</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link js-scroll-trigger" href="https://www.yan-holtz.com/">Who am I</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link js-scroll-trigger" href="https://www.d3-graph-gallery.com/about.html">About</a>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>
+    <script>
+    $(function(){
+      $("#mainNav").load("../html_chunk/menu.html");
+    });
+    </script>
+
+    <!-- THIS ALLOWS TO INSERT THE MODAL OF THE MENU THAT IS STORED IN A MENU_MODAL.HTML FILE-->
+    <div id="modal_menu_insertion"><!-- This document provide the code for 2 modals related to the menu: i/ the modal showing all chart types ii/ the search bar utility -->
+
+<!-- Modal menu: one icon per chart type with black background -->
+<div class="portfolio-modal modal fade" id="LogoMenu" tabindex="-1" role="dialog" aria-hidden="true" style="background-color: black;">
+  <div class="modal-dialog h-100 modal-dialog-centered" style="width: 80%; max-width: 917px">
+    <div class="modal-content">
+      <div class="close-modal" data-dismiss="modal" style="background-color: black;">
+        <a href="https://www.d3-graph-gallery.com/graph/shape.html"><p style="color: white; text-align: right; font-size: 23px">✕</p></a>
+      </div>
+      <div class="container" style="background-color: black;">
+        <div class="row">
+            <div class="modal-body">
+
+               <a href="https://www.d3-graph-gallery.com/violin.html">
+                 <img class="img-fluid imageOfMenu imageOfMenu" src="./Building shapes with d3_files/Violin150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/density.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Density150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/histogram.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Histogram150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/boxplot.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Box1150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/ridgeline.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Joyplot150.png" alt="">
+               </a>
+
+               <a href="https://www.d3-graph-gallery.com/scatter.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/ScatterPlot150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/heatmap">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Heatmap150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/correlogram.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Correlogram150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/bubble.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/BubblePlot150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/connectedscatter.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/ScatterConnected150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/density2d.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/2dDensity150.png" alt="">
+               </a>
+
+               <a href="https://www.d3-graph-gallery.com/barplot.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Bar150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/spider.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Spider150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/wordcloud.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Wordcloud150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/parallel.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Parallel1150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/lollipop.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Lollipop150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/circular_barplot.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/CircularBarplot150.png" alt="">
+               </a>
+
+               <a href="https://www.d3-graph-gallery.com/treemap.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Tree150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/donut.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Doughnut150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/pie.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Pie150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/dendrogram.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Dendrogram150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/circularpacking.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/CircularPacking150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/sunburst.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Sunburst150.png" alt="">
+               </a>
+
+               <a href="https://www.d3-graph-gallery.com/line.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Line150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/area.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Area150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/stackedarea.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/StackedArea150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/streamgraph.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Stream150.png" alt="">
+               </a>
+
+               <a href="https://www.d3-graph-gallery.com/backgroundmap.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Map150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/choropleth.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Choropleth150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/hexbinmap.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/MapHexbin150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/cartogram.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Cartogram150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/connection.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/ConnectedMap150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/bubblemap.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/BubbleMap150.png" alt="">
+               </a>
+
+               <a href="https://www.d3-graph-gallery.com/chord.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Chord150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/network.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Network150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/sankey.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Sankey150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/arc.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Arc150.png" alt="">
+               </a><a href="https://www.d3-graph-gallery.com/bundle.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Bundle150.png" alt="">
+               </a>
+
+              <a href="https://www.d3-graph-gallery.com/intro_d3js.html">
+                  <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Basic150_black.png" alt="">
+              </a>
+              <a href="https://www.d3-graph-gallery.com/interactivity.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/anim150.gif" alt="">
+              </a>
+              <a href="https://www.d3-graph-gallery.com/graph/shape.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Shapehelper150_black.png" alt="">
+              </a>
+              <a href="https://www.data-to-viz.com/caveats">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Bad150.png" alt="">
+              </a>
+              <a href="https://www.d3-graph-gallery.com/custom.html">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/Colours150.png" alt="">
+              </a>
+              <a href="https://www.r-graph-gallery.com/portfolio/data-art/">
+                 <img class="img-fluid imageOfMenu" src="./Building shapes with d3_files/DataArt1150.png" alt="">
+              </a>
+
+              <span>X</span>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- Research Bar Modal -->
+<div class="modal fade" id="researchModal" tabindex="-1" role="dialog" aria-hidden="true" style="margin-right: 20px; margin-left: 20px">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 1000px">
+    <div class="modal-content" style="min-height: 400px">
+      <div class="close-modal" data-dismiss="modal">
+        <a href="https://www.d3-graph-gallery.com/graph/shape.html"><p style="color: #b8b8b8; padding-right: 15px; padding-top: 5px; text-align: right; font-size: 23px">✕</p></a>
+      </div>
+      <div class="container">
+        <div class="row">
+            <div class="modal-body">
+              <!-- Project Details Go Here -->
+               <div style="margin-top: 120px; margin-bottom: 120px">
+                  <center>
+                    <input id="stringToSearch" type="text" name="usrname" value="d3.extent" style="  outline: 0; border-width: 0 0 2px; border-color: #b35900 !important;">
+                    <button id="researchSubmitButton" class="btn btn-secondary btn-md text-uppercase" type="button">Submit</button>
+                  </center>
+                </div>
+               <div id="resultSearch"></div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="./Building shapes with d3_files/d3.v4.js"></script>
+<script>
+// A function that returns a list of interesting pages for the query
+function returnPages() {
+
+  // get the text that must been searched
+  var toSearch = d3.select("#stringToSearch").property("value")
+  var address = "https://api.github.com/search/code?q=%22" + toSearch + "%22+path:graph+repo:holtzy/D3-graph-gallery"
+
+  // Do the request to the gthub API
+  d3.request(address)
+    .mimeType("application/vnd.github.v3.text-match+json")
+    .response(function(xhr) {
+      var data = JSON.parse(xhr.responseText);
+
+      // Div where I add the code
+      div = d3.select("#resultSearch")
+
+      // Erase the content of the div
+      div.html("")
+
+      // If no result, display a no result message
+      if(data.items.length==0){
+        div.html("<center><p>😔<i>No result found, sorry...</i>😔</p></center>")
+      }
+
+      // For each result item, add a section
+      div
+        .selectAll("resultItems")
+        .data(data.items)
+        .enter()
+          .append("div")
+          .html(function(d){
+            // Url to redirect to
+            url = "https://www.d3-graph-gallery.com/graph/" + d.name
+
+            // Code selection: if 2 entries, keep only the second one.
+            initialCode = d.text_matches[d.text_matches.length - 1].fragment
+            cleanCode = initialCode
+              .replace("\n", "<br>")
+              .replace("<li>", "")
+              .replace(toSearch, "<span style='background-color: yellow'>"+toSearch+'</span>')
+            codeReady = "<p class='codeResearch'>....." + cleanCode + ".....</p>"
+            return ("<br><br><a href=" + url + ">&rarr; " + d.name + "</a>" + "<br>" + codeReady)
+          })
+    }).get()
+
+  }
+
+// When the submit button is triggered, run the function
+d3.select("#researchSubmitButton").on("click", returnPages);
+
+// If the 'Enter' key is pressed, trigger the function as well
+var input = document.getElementById("stringToSearch");
+input.addEventListener("keyup", function(event) {
+  event.preventDefault();
+  if (event.keyCode === 13) {
+    document.getElementById("researchSubmitButton").click();
+  }
+});
+
+</script>
+</div>
+    <script>
+    $(function(){
+      $("#modal_menu_insertion").load("../html_chunk/menu_modal.html");
+    });
+    </script>
+
+
+
+
+    <!-- Header -->
+    <header class="masthead" style="padding-top: 150px; padding-bottom: 80px">
+      <div class="textlanding">
+          <h1>Building shapes in d3.js</h1>
+          <hr class="short_hr">
+          <br>
+          <ul class="list-inline social-buttons">
+            <li class="list-inline-item">
+              <a href="https://twitter.com/R_Graph_Gallery">
+                <i class="fa fa-twitter"></i>
+              </a>
+            </li>
+            <li class="list-inline-item social-buttons">
+              <a href="https://github.com/holtzy">
+                <i class="fa fa-github" style="color: white"></i>
+              </a>
+            </li>
+            <li class="list-inline-item social-buttons">
+              <a href="https://www.linkedin.com/in/yan-holtz-2477534a/">
+                <i class="fa fa-linkedin"></i>
+              </a>
+            </li>
+          </ul>
+          <br><br>
+          <p style="max-width: 700px; margin: auto">The d3.js allows to draw shapes, that together build a graph. This document describe a few helpers function allowing to draw svg from data more efficiently.</p>
+      </div>
+    </header>
+
+
+
+
+
+
+    <!-- TABLE of CONTENT -->
+    <div>
+        <nav class="col-sm-3 col-4" id="myScrollspy">
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <i class="nav-link" style="opacity: 0.5">with pure svg</i>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.d3-graph-gallery.com/graph/shape.html#mycircle">Circle</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.d3-graph-gallery.com/graph/shape.html#myrect">Rect</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.d3-graph-gallery.com/graph/shape.html#mysegment">Segment</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.d3-graph-gallery.com/graph/shape.html#mytext">Text</a>
+            </li>
+            <li class="nav-item">
+              <i class="nav-link" style="opacity: 0.5">with helper function</i>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.d3-graph-gallery.com/graph/shape.html#myline">Line</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.d3-graph-gallery.com/graph/shape.html#mycurve">Curve</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="https://www.d3-graph-gallery.com/graph/shape.html#myarea">Area</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.d3-graph-gallery.com/graph/shape.html#myarc">Arc</a>
+            </li>
+          </ul>
+        </nav>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- ==================== circle ==================== -->
+
+  <section id="mycircle">
+  <div class="container">
+    <h1>Adding a circle with <code>append("circle")</code></h1>
+    <hr>
+
+    <p>Here is how a circle would be drawn in pure <code>svg</code>, using a <code>circle</code> element. Three arguments are required: <code>cx</code>, <code>cy</code> and <code>r</code> for x position, y position and radius respectively.</p>
+    <pre class=" language-html"><code class=" language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>circle</span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">="</span><span class="token attr-value"><span class="token property">fill</span><span class="token punctuation">:</span> #69b3a2</span><span class="token punctuation">"</span></span> <span class="token attr-name">stroke</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>black<span class="token punctuation">"</span></span> <span class="token attr-name">cx</span><span class="token attr-value"><span class="token punctuation">=</span>100</span> <span class="token attr-name">cy</span><span class="token attr-value"><span class="token punctuation">=</span>100</span> <span class="token attr-name">r</span><span class="token attr-value"><span class="token punctuation">=</span>40</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>circle</span><span class="token punctuation">&gt;</span></span></code></pre>
+    <svg width="800px" height="200px"><circle style="fill: #69b3a2" stroke="black" cx="100" cy="100" r="40"></circle></svg>
+
+    <p>Now let's do it in javascript. It is basically the same process. Note that the code below expect a div with the id 'circle' somewhere in the html code.</p>
+    <div>
+
+  <aside>← Edit me! </aside>
+  <pre class=" language-js"><code id="code-circle" contenteditable="true" class=" language-js">
+<span class="token comment">// create svg element:</span>
+<span class="token keyword">var</span> svg <span class="token operator">=</span> d3<span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token string">"#circle"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"svg"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"width"</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"height"</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span>
+
+<span class="token comment">// Add the path using this helper function</span>
+svg<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">'circle'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'cx'</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'cy'</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'r'</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'stroke'</span><span class="token punctuation">,</span> <span class="token string">'black'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'fill'</span><span class="token punctuation">,</span> <span class="token string">'#69a3b2'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre>
+
+
+    </div>
+
+  <div id="circle"><svg width="200" height="200"><circle cx="100" cy="100" r="50" stroke="black" fill="#69a3b2"></circle></svg></div>
+  </div>
+  </section>
+
+
+  <script>
+  // Read the JS fragment at the beginning. Read it again if it changes
+  myJSParserShort('code-circle')
+  document.getElementById('code-circle').addEventListener("input", function() {
+    d3.select('#circle').html("");
+    myJSParser('code-circle');
+  })
+  </script>
+
+
+  <!-- ================================================================================= -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ==================== rect ==================== -->
+
+<section id="myrect">
+<div class="container">
+  <h1>Adding a rectangle with <code>append("rect")</code></h1>
+  <hr>
+
+  <p>Here is how a rectangle would be drawn in pure <code>svg</code>, using a <code>rect</code> element. Four arguments are required: <code>x</code>, <code>y</code>, <code>width</code> and <code>height</code>.</p>
+  <pre class=" language-html"><code class=" language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>rect</span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">="</span><span class="token attr-value"><span class="token property">fill</span><span class="token punctuation">:</span> #69b3a2</span><span class="token punctuation">"</span></span> <span class="token attr-name">stroke</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>black<span class="token punctuation">"</span></span> <span class="token attr-name">x</span><span class="token attr-value"><span class="token punctuation">=</span>10</span> <span class="token attr-name">y</span><span class="token attr-value"><span class="token punctuation">=</span>100,</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span>300</span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span>40</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>rect</span><span class="token punctuation">&gt;</span></span></code></pre>
+  <svg width="800px" height="100px"><rect style="fill: #69b3a2" stroke="black" x="10" y="100," width="300" height="40"></rect></svg>
+
+  <p>Now let's do it in javascript. It is basically the same process. Note that the code below expect a div with the id 'rect' somewhere in the html code.</p>
+  <div>
+
+<aside>← Edit me! </aside>
+<pre class=" language-js"><code id="code-rect" contenteditable="true" class=" language-js">
+<span class="token comment">// create svg element:</span>
+<span class="token keyword">var</span> svg <span class="token operator">=</span> d3<span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token string">"#rect"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"svg"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"width"</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"height"</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span>
+
+<span class="token comment">// Add the path using this helper function</span>
+svg<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">'rect'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'x'</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'y'</span><span class="token punctuation">,</span> <span class="token number">120</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'width'</span><span class="token punctuation">,</span> <span class="token number">600</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'height'</span><span class="token punctuation">,</span> <span class="token number">40</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'stroke'</span><span class="token punctuation">,</span> <span class="token string">'black'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'fill'</span><span class="token punctuation">,</span> <span class="token string">'#69a3b2'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+
+
+  </div>
+
+<div id="rect"><svg width="800" height="200"><rect x="10" y="120" width="600" height="40" stroke="black" fill="#69a3b2"></rect></svg></div>
+</div>
+</section>
+
+
+<script>
+// Read the JS fragment at the beginning. Read it again if it changes
+myJSParserShort('code-rect')
+document.getElementById('code-rect').addEventListener("input", function() {
+  d3.select('#rect').html("");
+  myJSParser('code-rect');
+})
+</script>
+
+
+<!-- ================================================================================= -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ==================== segment ==================== -->
+
+<section id="mysegment">
+<div class="container">
+  <h1>Adding a segment with <code>append("line")</code></h1>
+  <hr>
+
+  <p>Here is how a segment would be drawn in pure <code>svg</code>, using a <code>line</code> element. Four arguments are required: <code>x0</code>, <code>y0</code>, <code>x1</code> and <code>y1</code>.</p>
+  <pre class=" language-html"><code class=" language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>line</span> <span class="token attr-name">stroke</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>red<span class="token punctuation">"</span></span> <span class="token attr-name">x0</span><span class="token attr-value"><span class="token punctuation">=</span>10</span> <span class="token attr-name">y0</span><span class="token attr-value"><span class="token punctuation">=</span>10,</span> <span class="token attr-name">x1</span><span class="token attr-value"><span class="token punctuation">=</span>500</span> <span class="token attr-name">y1</span><span class="token attr-value"><span class="token punctuation">=</span>100</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>line</span><span class="token punctuation">&gt;</span></span></code></pre>
+  <svg width="800px" height="100px"><line stroke="red" x0="10" y0="10," x1="500" y1="100"></line></svg>
+
+  <p>Now let's do it in javascript. It is basically the same process. Note that the code below expect a div with the id 'segment' somewhere in the html code.</p>
+  <div>
+
+<aside>← Edit me! </aside>
+<pre class=" language-js"><code id="code-segment" contenteditable="true" class=" language-js">
+<span class="token comment">// create svg element:</span>
+<span class="token keyword">var</span> svg <span class="token operator">=</span> d3<span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token string">"#segment"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"svg"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"width"</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"height"</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span>
+
+<span class="token comment">// Add the path using this helper function</span>
+svg<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">'line'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'x1'</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'y1'</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'x2'</span><span class="token punctuation">,</span> <span class="token number">700</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'y2'</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'stroke'</span><span class="token punctuation">,</span> <span class="token string">'red'</span><span class="token punctuation">)</span>
+</code></pre>
+
+
+  </div>
+
+<div id="segment"><svg width="800" height="200"><line x1="10" y1="10" x2="700" y2="100" stroke="red"></line></svg></div>
+</div>
+</section>
+
+
+<script>
+// Read the JS fragment at the beginning. Read it again if it changes
+myJSParserShort('code-segment')
+document.getElementById('code-segment').addEventListener("input", function() {
+  d3.select('#segment').html("");
+  myJSParser('code-segment');
+})
+</script>
+
+
+<!-- ================================================================================= -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ==================== text ==================== -->
+
+<section id="mytext">
+<div class="container">
+  <h1>Adding text with <code>append("text")</code></h1>
+  <hr>
+
+  <p>Here is how text would be drawn in pure <code>svg</code>, using a <code>text</code> element. Three arguments are required: <code>x</code>, <code>y</code> and <code>text</code>.</p>
+  <pre class=" language-html"><code class=" language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>text</span> <span class="token attr-name">stroke</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>green<span class="token punctuation">"</span></span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">="</span><span class="token attr-value"><span class="token property">font-size</span><span class="token punctuation">:</span> 19px</span><span class="token punctuation">"</span></span> <span class="token attr-name">x</span><span class="token attr-value"><span class="token punctuation">=</span>100</span> <span class="token attr-name">y</span><span class="token attr-value"><span class="token punctuation">=</span>50</span><span class="token punctuation">&gt;</span></span>I'm a piece of text<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>text</span><span class="token punctuation">&gt;</span></span></code></pre>
+  <svg width="800px" height="100px"><text stroke="green" style="font-size: 19px" x="100" y="50">I'm a piece of text</text></svg>
+
+  <p>Now let's do it in javascript. It is basically the same process. Note that the code below expect a div with the id 'text' somewhere in the html code.</p>
+  <div>
+
+<aside>← Edit me! </aside>
+<pre class=" language-js"><code id="code-text" contenteditable="true" class=" language-js">
+<span class="token comment">// create svg element:</span>
+<span class="token keyword">var</span> svg <span class="token operator">=</span> d3<span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token string">"#text"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"svg"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"width"</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"height"</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span>
+
+<span class="token comment">// Add the path using this helper function</span>
+svg<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">'text'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'x'</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'y'</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'stroke'</span><span class="token punctuation">,</span> <span class="token string">'green'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">style</span><span class="token punctuation">(</span><span class="token string">"font-size"</span><span class="token punctuation">,</span> <span class="token number">19</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token string">"I'm another piece of text"</span><span class="token punctuation">)</span>
+
+</code></pre>
+
+
+  </div>
+
+<div id="text"><svg width="800" height="200"><text x="100" y="50" stroke="green" style="font-size: 19px;">I'm another piece of text</text></svg></div>
+</div>
+</section>
+
+
+<script>
+// Read the JS fragment at the beginning. Read it again if it changes
+myJSParserShort('code-text')
+document.getElementById('code-text').addEventListener("input", function() {
+  d3.select('#text').html("");
+  myJSParser('code-text');
+})
+</script>
+
+
+<!-- ================================================================================= -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ==================== Line ==================== -->
+
+<section id="myline">
+<div class="container">
+  <h1>Adding a line with <code>d3.line()</code></h1>
+  <hr>
+
+  <p>Here is how a line would be drawn in pure <code>svg</code>, using a <code>path</code> element. You can learn more about the obscure syntax of the <code>d</code> argument <a href="https://www.w3schools.com/graphics/svg_path.asp">here</a>.</p>
+  <pre class=" language-html"><code class=" language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>path</span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">="</span><span class="token attr-value"><span class="token property">fill</span><span class="token punctuation">:</span> none</span><span class="token punctuation">"</span></span> <span class="token attr-name">stroke</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>black<span class="token punctuation">"</span></span> <span class="token attr-name">d</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>M0 20 L150 150 L300 100 L450 20 L600 130<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>path</span><span class="token punctuation">&gt;</span></span></code></pre>
+  <svg width="800px" height="200px"><path style="fill: none" stroke="black" d="M0 20 L150 150 L300 100 L450 20 L600 130"></path></svg>
+
+  <p>Fortunately, d3.js provides the <code>d3.line()</code> function, allowing to draw a line more efficiently. Basically it takes our data and convert it into the SVG Path we wrote above.</p>
+  <div>
+
+<aside>← Edit me! </aside>
+<pre class=" language-js"><code id="code-line" contenteditable="true" class=" language-js"><span class="token comment">// create data</span>
+<span class="token keyword">var</span> data <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>x<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> y<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>x<span class="token punctuation">:</span> <span class="token number">150</span><span class="token punctuation">,</span> y<span class="token punctuation">:</span> <span class="token number">150</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>x<span class="token punctuation">:</span> <span class="token number">300</span><span class="token punctuation">,</span> y<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>x<span class="token punctuation">:</span> <span class="token number">450</span><span class="token punctuation">,</span> y<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>x<span class="token punctuation">:</span> <span class="token number">600</span><span class="token punctuation">,</span> y<span class="token punctuation">:</span> <span class="token number">130</span><span class="token punctuation">}</span><span class="token punctuation">]</span>
+
+<span class="token comment">// create svg element:</span>
+<span class="token keyword">var</span> svg <span class="token operator">=</span> d3<span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token string">"#line"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"svg"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"width"</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"height"</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span>
+
+<span class="token comment">// prepare a helper function</span>
+<span class="token keyword">var</span> lineFunc <span class="token operator">=</span> d3<span class="token punctuation">.</span><span class="token function">line</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">x</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> d<span class="token punctuation">.</span>x <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">y</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> d<span class="token punctuation">.</span>y <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// Add the path using this helper function</span>
+svg<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'d'</span><span class="token punctuation">,</span> <span class="token function">lineFunc</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'stroke'</span><span class="token punctuation">,</span> <span class="token string">'black'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'fill'</span><span class="token punctuation">,</span> <span class="token string">'none'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+
+
+  </div>
+
+<div id="line"><svg width="800" height="200"><path d="M0,20L150,150L300,100L450,20L600,130" stroke="black" fill="none"></path></svg></div>
+
+<p><u>Going further:</u> This <a href="https://www.dashingd3js.com/svg-paths-and-d3js">page</a> by dashingd3.js is awesome to go more in depth</p>
+</div>
+</section>
+
+
+<ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: none !important;" data-ad-status="unfilled"><ins id="aswift_0_expand" tabindex="0" title="Advertisement" aria-label="Advertisement" style="border: none; height: 0px; width: 0px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-table;"><ins id="aswift_0_anchor" style="border: none; height: 0px; width: 0px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: block;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:undefinedpx;height:undefinedpx;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" frameborder="0" src="./Building shapes with d3_files/ads.html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" data-google-container-id="a!1" data-load-complete="true"></iframe></ins></ins></ins><script>
+// Read the JS fragment at the beginning. Read it again if it changes
+myJSParserShort('code-line')
+document.getElementById('code-line').addEventListener("input", function() {
+  d3.select('#line').html("");
+  myJSParser('code-line');
+})
+</script>
+
+
+<!-- ================================================================================= -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ==================== curve ==================== -->
+
+<section id="mycurve">
+<div class="container">
+  <h1>Adding a curve with <code>d3.line()</code></h1>
+  <hr>
+
+  <p>The <code>d3.line()</code> function has an option that allows to draw different <u>line interpolations</u>. Here is an example using a <u>curve</u>.</p>
+  <div>
+
+<aside>← Edit me! </aside>
+<pre class=" language-js"><code id="code-curve" contenteditable="true" class=" language-js"><span class="token comment">// create data</span>
+<span class="token keyword">var</span> data <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>x<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> y<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>x<span class="token punctuation">:</span> <span class="token number">150</span><span class="token punctuation">,</span> y<span class="token punctuation">:</span> <span class="token number">150</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>x<span class="token punctuation">:</span> <span class="token number">300</span><span class="token punctuation">,</span> y<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>x<span class="token punctuation">:</span> <span class="token number">450</span><span class="token punctuation">,</span> y<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>x<span class="token punctuation">:</span> <span class="token number">600</span><span class="token punctuation">,</span> y<span class="token punctuation">:</span> <span class="token number">130</span><span class="token punctuation">}</span><span class="token punctuation">]</span>
+
+<span class="token comment">// create svg element:</span>
+<span class="token keyword">var</span> svg <span class="token operator">=</span> d3<span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token string">"#curve"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"svg"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"width"</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"height"</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span>
+
+<span class="token comment">// prepare a helper function</span>
+<span class="token keyword">var</span> curveFunc <span class="token operator">=</span> d3<span class="token punctuation">.</span><span class="token function">line</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">curve</span><span class="token punctuation">(</span>d3<span class="token punctuation">.</span>curveBasis<span class="token punctuation">)</span>              <span class="token comment">// This is where you define the type of curve. Try curveStep for instance.</span>
+  <span class="token punctuation">.</span><span class="token function">x</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> d<span class="token punctuation">.</span>x <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">y</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> d<span class="token punctuation">.</span>y <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// Add the path using this helper function</span>
+svg<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'d'</span><span class="token punctuation">,</span> <span class="token function">curveFunc</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'stroke'</span><span class="token punctuation">,</span> <span class="token string">'black'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'fill'</span><span class="token punctuation">,</span> <span class="token string">'none'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+
+
+  </div>
+
+<div id="curve"><svg width="800" height="200"><path d="M0,20L25,41.666666666666664C50,63.333333333333336,100,106.66666666666667,150,120C200,133.33333333333334,250,116.66666666666667,300,95C350,73.33333333333333,400,46.666666666666664,450,51.666666666666664C500,56.666666666666664,550,93.33333333333333,575,111.66666666666667L600,130" stroke="black" fill="none"></path></svg></div>
+
+<p><u>Going further:</u> Different type of curve are available: curve Basis, Linear, Step, StepBefore, StepAfter, Cardinal and more. See them all on <a href="https://bl.ocks.org/d3noob/ced1b9b18bd8192d2c898884033b5529">this block</a>.</p>
+</div>
+</section>
+
+
+<script>
+// Read the JS fragment at the beginning. Read it again if it changes
+myJSParserShort('code-curve')
+document.getElementById('code-curve').addEventListener("input", function() {
+  d3.select('#curve').html("");
+  myJSParser('code-curve');
+})
+</script>
+
+
+<!-- ================================================================================= -->
+
+
+
+
+
+
+
+
+
+<!-- ==================== Area ==================== -->
+
+  <section id="myarea">
+  <div class="container">
+
+    <h1>Build an area with <code>d3.area()</code></h1>
+    <hr>
+    <p>In pure <code>svg</code>, an area would also been drawn using a <code>path</code> element. You can learn more about the obscure syntax of the <code>d</code> argument <a href="https://www.w3schools.com/graphics/svg_path.asp">here</a>.</p>
+    <pre class=" language-html"><code class=" language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>path</span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">="</span><span class="token attr-value"><span class="token property">fill</span><span class="token punctuation">:</span> #69b3a2</span><span class="token punctuation">"</span></span> <span class="token attr-name">stroke</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>black<span class="token punctuation">"</span></span> <span class="token attr-name">d</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>M0 200 L0 20 L150 150 L300 100 L450 20 L600 130 L600 200<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>path</span><span class="token punctuation">&gt;</span></span></code></pre>
+    <svg width="800px" height="200px"><path style="fill: #69b3a2" stroke="black" d="M0 200 L0 20 L150 150 L300 100 L450 20 L600 130 L600 200"></path></svg>
+
+    <br>
+    <p>Fortunately, d3.js provides the <code>d3.area()</code> function, allowing to draw an area more efficiently. Basically it takes our data and convert it into the SVG Path we wrote above. An area is defined by two bounding lines that often share the same X axis.</p>
+
+      <div>
+        <pre class=" language-js"><code id="code-area" contenteditable="true" class=" language-js"><span class="token comment">// create data</span>
+<span class="token keyword">var</span> data <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>x<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> y<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>x<span class="token punctuation">:</span> <span class="token number">150</span><span class="token punctuation">,</span> y<span class="token punctuation">:</span> <span class="token number">150</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>x<span class="token punctuation">:</span> <span class="token number">300</span><span class="token punctuation">,</span> y<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>x<span class="token punctuation">:</span> <span class="token number">450</span><span class="token punctuation">,</span> y<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>x<span class="token punctuation">:</span> <span class="token number">600</span><span class="token punctuation">,</span> y<span class="token punctuation">:</span> <span class="token number">130</span><span class="token punctuation">}</span><span class="token punctuation">]</span>
+
+<span class="token comment">// create svg element:</span>
+<span class="token keyword">var</span> svg <span class="token operator">=</span> d3<span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token string">"#area"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"svg"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"width"</span><span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"height"</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span>
+
+<span class="token comment">// prepare a helper function</span>
+<span class="token keyword">var</span> curveFunc <span class="token operator">=</span> d3<span class="token punctuation">.</span><span class="token function">area</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">x</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> d<span class="token punctuation">.</span>x <span class="token punctuation">}</span><span class="token punctuation">)</span>      <span class="token comment">// Position of both line breaks on the X axis</span>
+  <span class="token punctuation">.</span><span class="token function">y1</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> d<span class="token punctuation">.</span>y <span class="token punctuation">}</span><span class="token punctuation">)</span>     <span class="token comment">// Y position of top line breaks</span>
+  <span class="token punctuation">.</span><span class="token function">y0</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span>                            <span class="token comment">// Y position of bottom line breaks (200 = bottom of svg area)</span>
+
+<span class="token comment">// Add the path using this helper function</span>
+svg<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'d'</span><span class="token punctuation">,</span> <span class="token function">curveFunc</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'stroke'</span><span class="token punctuation">,</span> <span class="token string">'black'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'fill'</span><span class="token punctuation">,</span> <span class="token string">'#69b3a2'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+      </div>
+
+
+<div id="area"><svg width="800" height="200"><path d="M0,20L150,150L300,100L450,20L600,130L600,200L450,200L300,200L150,200L0,200Z" stroke="black" fill="#69b3a2"></path></svg></div>
+<br>
+<p><u>Note:</u> It is also possible to give specific X position for the bottom line. See the doc.</p>
+
+  </div>
+</section>
+
+
+<script>
+// Read the JS fragment at the beginning. Read it again if it changes
+myJSParserShort('code-area')
+document.getElementById('code-area').addEventListener("input", function() {
+  d3.select('#area').html("");
+  myJSParser('code-area');
+})
+</script>
+
+
+<!-- ================================================================================= -->
+
+
+
+
+
+
+
+
+
+<!-- ==================== arc ==================== -->
+
+<section id="myarc">
+<div class="container">
+
+  <h1>Draw arcs with <code>d3.arc()</code></h1>
+  <hr>
+  <p> Let's see how drawing an arc in pure <code>svg</code> looks like:</p>
+  <pre class=" language-html"><code class=" language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>path</span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">="</span><span class="token attr-value"><span class="token property">fill</span><span class="token punctuation">:</span> #69b3a2</span><span class="token punctuation">"</span></span> <span class="token attr-name">stroke</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>black<span class="token punctuation">"</span></span> <span class="token attr-name">transform</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>translate(400,200)<span class="token punctuation">"</span></span> <span class="token attr-name">d</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>M0,149 A150,150,0,0,1,-0.47,-149.9 L-0.3,-99.9 A100,100,0,0,0,0.15,99.9Z<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>path</span><span class="token punctuation">&gt;</span></span></code></pre>
+  <svg width="800px" height="400px"><path style="fill: #69b3a2" stroke="black" transform="translate(400,200)" d="M0,149 A150,150,0,0,1,-0.47,-149.9 L-0.3,-99.9 A100,100,0,0,0,0.15,99.9Z"></path></svg>
+  <p>That was a bit tough. Now let's use the <code>d3.arc()</code> helper function to draw the same kind of shape. We need to provide 4 arguments: <code>innerRadius</code>, <code>outerRadius</code>, <code>startAngle</code>, <code>endAngle</code>. If you're not sure what these argument control, just play with the code below to figure it out.</p>
+
+      <div>
+        <pre class=" language-js"><code id="code-arc" contenteditable="true" class=" language-js"><span class="token comment">// create svg element</span>
+<span class="token keyword">var</span> svg <span class="token operator">=</span> d3<span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token string">"#arc"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"svg"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"width"</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"height"</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">)</span>
+
+<span class="token comment">// add an arc</span>
+svg
+  <span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"path"</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"transform"</span><span class="token punctuation">,</span> <span class="token string">"translate(400,200)"</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"d"</span><span class="token punctuation">,</span> d3<span class="token punctuation">.</span><span class="token function">arc</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">innerRadius</span><span class="token punctuation">(</span> <span class="token number">100</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">outerRadius</span><span class="token punctuation">(</span> <span class="token number">150</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">startAngle</span><span class="token punctuation">(</span> <span class="token number">3.14</span> <span class="token punctuation">)</span>     <span class="token comment">// It's in radian, so Pi = 3.14 = bottom.</span>
+    <span class="token punctuation">.</span><span class="token function">endAngle</span><span class="token punctuation">(</span> <span class="token number">6.28</span> <span class="token punctuation">)</span>       <span class="token comment">// 2*Pi = 6.28 = top</span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'stroke'</span><span class="token punctuation">,</span> <span class="token string">'black'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'fill'</span><span class="token punctuation">,</span> <span class="token string">'#69b3a2'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+      </div>
+
+
+<div id="arc"><svg width="1000" height="400"><path transform="translate(400,200)" d="M0.23889793747301502,149.99980975913093A150,150,0,0,1,-0.47779526897068936,-149.99923903700628L-0.3185301793137929,-99.99949269133752A100,100,0,0,0,0.1592652916486767,99.99987317275395Z" stroke="black" fill="#69b3a2"></path></svg></div>
+
+<p><u>Note:</u> It is of interest to note that with a <code>innerRadius</code> of 0, the shape looks like a part of a <a href="https://www.d3-graph-gallery.com/pie.html">pie chart</a>.</p>
+
+  </div>
+</section>
+
+
+<script>
+// Read the JS fragment at the beginning. Read it again if it changes
+myJSParserShort('code-arc')
+document.getElementById('code-arc').addEventListener("input", function() {
+  d3.select('#arc').html("");
+  myJSParser('code-arc');
+})
+</script>
+
+
+<!-- ================================================================================= -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ============================ RELATED BLOCKS ============================ -->
+
+<section id="related" class="bg-light" style="padding-top: 70px; padding-bottom: 70px; height: auto !important;"><div class="google-auto-placed" style="width: 100%; height: auto; clear: both; text-align: center;"><ins data-ad-format="auto" class="adsbygoogle adsbygoogle-noablate" data-ad-client="ca-pub-3523953066677938" data-adsbygoogle-status="done" style="display: block; margin: 10px auto; background-color: transparent; height: 280px;" data-ad-status="filled"><ins id="aswift_1_expand" tabindex="0" title="Advertisement" aria-label="Advertisement" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-table;"><ins id="aswift_1_anchor" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: block; overflow: visible;"><iframe id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" src="./Building shapes with d3_files/ads(1).html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" data-google-container-id="a!2" data-google-query-id="CIf4wZWe9vMCFSEJaAgdIegGJQ" data-load-complete="true"></iframe></ins></ins></ins></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-5 text-center .align-middle" style="border-right: solid; ">
+        <div style="display: table; height: 150px; overflow: hidden;">
+          <div style="display: table-cell; vertical-align: middle;">
+            <h2 class="section-heading text-uppercase" style="color: black">Related blocks</h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div style="display: table; height: 150px; overflow: hidden;">
+          <div style="display: table-cell; vertical-align: middle;">
+            <ul>
+            <li><i>v4 curve interpolation comparison - </i>by <a href="https://bl.ocks.org/d3noob/ced1b9b18bd8192d2c898884033b5529">d3noob</a></li>
+            <br>
+            <li><i>d3-shape documentation - </i>by <a href="https://github.com/d3/d3-shape#curves">Mike Bostock</a></li>
+            <br>
+            <li><i>SVG Paths and D3.js - </i>by <a href="https://www.dashingd3js.com/svg-paths-and-d3js">Dashing D3.js</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<!-- ============================ CONTACT SECTION ============================ -->
+
+<!-- ANCHOR -->
+<a name="contactanchor"></a>
+
+<section id="contact" class="bg" style="background-color: white"><div class="container">
+  <div class="row">
+    <div class="col-lg-2 text-center"></div>
+    <div class="col-lg-8 text-center">
+      <br><br><br>
+      <h2 class="section-heading text-uppercase" style="color: black">Contact</h2>
+      <p>This document is a work by <a href="https://www.yan-holtz.com/">Yan Holtz</a>. Any feedback is highly encouraged. You can fill an issue on <a href="https://github.com/holtzy/D3-graph-gallery/issues">Github</a>, drop me a message on <a href="https://twitter.com/R_Graph_Gallery">Twitter</a>, or send an email pasting <a href="https://www.d3-graph-gallery.com/graph/shape.html">yan.holtz.data</a> with <a href="https://www.d3-graph-gallery.com/graph/shape.html">gmail.com</a>.</p>
+      <div style="text-align:center">
+         <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="https://github.com/holtzy/D3-graph-gallery">Github</a>
+         <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="https://twitter.com/R_Graph_Gallery">Twitter</a>
+       </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- THIS ALLOWS TO INSERT THE CONTACT CHUNK THAT IS STORED IN A CONTACT.HTML FILE-->
+<script>
+$(function(){
+  $("#contact").load("../html_chunk/contact.html");
+});
+</script>
+
+
+
+
+
+<!-- ============================ FOOTER SECTION ============================ -->
+<footer class="bg-light" id="myFooter"><div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <span class="copyright">Copyright © the d3 graph gallery 2018</span>
+    </div>
+    <div class="col-md-4">
+      <ul class="list-inline social-buttons">
+        <li class="list-inline-item">
+          <a href="https://twitter.com/R_Graph_Gallery">
+            <i class="fa fa-twitter"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a href="https://github.com/holtzy">
+            <i class="fa fa-github"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a href="https://www.linkedin.com/in/yan-holtz-2477534a/">
+            <i class="fa fa-linkedin"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-4">
+      <ul class="list-inline quicklinks">
+        <li class="list-inline-item">
+          <a href="https://www.d3-graph-gallery.com/graph/shape.html#">Privacy Policy</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="https://www.d3-graph-gallery.com/graph/shape.html#">Terms of Use</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+</footer>
+
+<!-- THIS ALLOWS TO INSERT THE FOOTER THAT IS STORED IN A FOOTER.HTML FILE-->
+<script>
+$(function(){
+  $("#myFooter").load("../html_chunk/footer.html");
+});
+</script>
+
+<!-- ============================ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<iframe name="googlefcPresent" style="display: none; width: 0px; height: 0px; border: none; z-index: -1000; left: -1000px; top: -1000px;" src="./Building shapes with d3_files/saved_resource(1).html"></iframe><iframe name="__tcfapiLocator" src="./Building shapes with d3_files/saved_resource(2).html" style="display: none; width: 0px; height: 0px; border: none; z-index: -1000; left: -1000px; top: -1000px;"></iframe><iframe name="googlefcInactive" src="./Building shapes with d3_files/saved_resource(3).html" style="display: none; width: 0px; height: 0px; border: none; z-index: -1000; left: -1000px; top: -1000px;"></iframe><iframe name="googlefcLoaded" src="./Building shapes with d3_files/saved_resource(4).html" style="display: none; width: 0px; height: 0px; border: none; z-index: -1000; left: -1000px; top: -1000px;"></iframe><iframe src="./Building shapes with d3_files/aframe.html" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="./Building shapes with d3_files/zrt_lookup.html" style="display: none;"></iframe><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
