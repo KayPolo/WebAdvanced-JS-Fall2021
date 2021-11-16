@@ -1,0 +1,24 @@
+[
+    {
+        "id": 0,
+        "quantity":3,
+        "name":"Computer"
+
+    },
+    {
+        "id": 1,
+        "quantity":0,
+        "name":"Headphones"
+
+    },{
+        "id": 2,
+        "quantity":5,
+        "name":"Keyboard"
+
+    },{
+        "id": 3,
+        "quantity":2,
+        "name":"Mouse"
+
+    }
+]
