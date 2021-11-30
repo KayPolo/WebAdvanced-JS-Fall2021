@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>WebSocket App</title>
+        <link rel="stylesheet" href="./style.css">
+
+        <script src="/socket.io/socket.io.js"></script>
+
+    </head>
+
+
+    <body>
+
+        <div id="web-chat">
+            <h2>Web Advanced JS Chat</h2>
+
+            <div id="chat-window">
+                <div id="output"></div>
+                <div id="feedback"></div>
+            </div>
+
+            <input id="handle" type="text" placeholder="User Name"/>
+            <input id="message" type="text" placeholder="Write Something"/>
+            <button id="send">SEND</button>
+
+        </div>
+
+
+
+        <script src="./client.js"></script>
+
+    </body>
+
+
+</html>
